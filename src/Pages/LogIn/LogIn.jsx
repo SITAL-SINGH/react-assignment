@@ -1,6 +1,6 @@
-import './LogIn.css'
-
 import React, { useState } from 'react';
+import { useAuth } from '../../App';
+import './LogIn.css';
 
 
 const InputField = ({
@@ -48,11 +48,8 @@ const LogIn = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState('');
-
-  const mockUser = {
-    email: "student@edu.np",
-    password: "123456"
-  };
+  
+  const { login } = useAuth();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -111,18 +108,21 @@ const LogIn = () => {
     if (Object.keys(newErrors).length === 0) {
       setIsLoading(true);
       
+      // Simulate API call
       setTimeout(() => {
         setIsLoading(false);
         
-        if (formData.email === mockUser.email && formData.password === mockUser.password) {
+        // Use the login function from context
+        const success = login(formData.email, formData.password);
+        
+        if (success) {
           if (formData.rememberMe) {
             localStorage.setItem('rememberedEmail', formData.email);
           } else {
             localStorage.removeItem('rememberedEmail');
           }
-          
           console.log('Login successful!');
-          window.location.href = '/dashboard';
+          // Navigation is now handled by the Router in App.js
         } else {
           setLoginError('Invalid email or password');
         }

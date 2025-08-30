@@ -5,7 +5,7 @@ import Performance from '../Performance/Performance';
 import Material from '../Material/Material';
 import StudentProfile from '../Profile/Profile';
 import Announcement from '../Announcement/Annoucement';
-import LogIn from '../LogIn/LogIn';
+// import LogIn from '../LogIn/LogIn';
 
 // Mock data (would typically be in a separate file)
 const mockData = {
@@ -147,7 +147,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, currentView, setCurrentView }) =
     { id: 'Material', label: 'Study Materials', icon: '📚' },
     { id: 'Announcement', label: 'Announcements', icon: '📢' },
     { id: 'Profile', label: 'Profile', icon: '👤' },
-    { id: 'LogIn', label: 'LogIn', icon: '👤' },
+    
   ];
 
   return (
@@ -368,7 +368,7 @@ const Dashboard = () => {
           {currentView === 'Material' && <Material />}
           {currentView === 'Announcement' && <Announcement />}
           {currentView === 'Profile' && <StudentProfile />}
-          {currentView === 'LogIn' && <LogIn/>}
+       
         </main>
       </div>
 

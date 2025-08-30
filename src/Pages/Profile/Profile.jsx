@@ -1,49 +1,6 @@
 import React, { useState } from 'react';
+import { useAuth } from '../../App';
 import "./Profile.css"
-
-const StudentProfile = () => {
-  const [studentData, setStudentData] = useState({
-    name: 'John Doe',
-    email: 'john.doe@university.edu',
-    course: 'Computer Science',
-    year: '3',
-    studentId: 'STU-12345',
-    profilePicture: null
-  });
-  const [isEditing, setIsEditing] = useState(false);
-  const [tempData, setTempData] = useState({});
-
-  const handleEditClick = () => {
-    setTempData(studentData);
-    setIsEditing(true);
-  };
-
-  const handleSave = (newData) => {
-    setStudentData(newData);
-    setIsEditing(false);
-  };
-
-  const handleCancel = () => {
-    setIsEditing(false);
-  };
-
-  return (
-    <div className="student-profile">
-      {isEditing ? (
-        <EditProfileForm
-          studentData={tempData}
-          onSave={handleSave}
-          onCancel={handleCancel}
-        />
-      ) : (
-        <ProfileCard
-          studentData={studentData}
-          onEditClick={handleEditClick}
-        />
-      )}
-    </div>
-  );
-};
 
 const ProfileCard = ({ studentData, onEditClick }) => {
   return (
@@ -213,7 +170,41 @@ const EditProfileForm = ({ studentData, onSave, onCancel }) => {
   );
 };
 
+const StudentProfile = () => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [tempData, setTempData] = useState({});
+  const { user, updateProfile } = useAuth();
+
+  const handleEditClick = () => {
+    setTempData(user);
+    setIsEditing(true);
+  };
+
+  const handleSave = (newData) => {
+    updateProfile(newData);
+    setIsEditing(false);
+  };
+
+  const handleCancel = () => {
+    setIsEditing(false);
+  };
+
+  return (
+    <div className="student-profile">
+      {isEditing ? (
+        <EditProfileForm
+          studentData={tempData}
+          onSave={handleSave}
+          onCancel={handleCancel}
+        />
+      ) : (
+        <ProfileCard
+          studentData={user}
+          onEditClick={handleEditClick}
+        />
+      )}
+    </div>
+  );
+};
+
 export default StudentProfile;
-
-
-
