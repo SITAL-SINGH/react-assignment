@@ -49,6 +49,11 @@ function App() {
       const { password, ...userWithoutPassword } = userFound;
       setUser(userWithoutPassword);
       setIsAuthenticated(true);
+
+            // Save to localStorage ✅
+      localStorage.setItem("user", JSON.stringify(userWithoutPassword));
+      localStorage.setItem("isAuthenticated", "true");
+
       return true;
     }
     return false;
@@ -57,6 +62,11 @@ function App() {
   const logout = () => {
     setUser(null);
     setIsAuthenticated(false);
+
+    
+    // Clear storage
+    localStorage.removeItem("user");
+    localStorage.removeItem("isAuthenticated");
   };
 
   const updateProfile = (updatedUser) => {

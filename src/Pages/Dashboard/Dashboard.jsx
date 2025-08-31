@@ -153,7 +153,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, currentView, setCurrentView }) =
   return (
     <div className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
       <div className="sidebar-header">
-        {!isCollapsed && <h2>Student Portal</h2>}
+        {!isCollapsed && <h2>Admin Portal</h2>}
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
           className="collapse-btn"
@@ -196,7 +196,7 @@ const Navbar = ({ darkMode, setDarkMode, toggleSidebar }) => {
         >
           ☰
         </button>
-        <h1>Student Dashboard</h1>
+        <h1>Admin Dashboard</h1>
       </div>
 
       <div className="navbar-right">
@@ -363,6 +363,7 @@ const Dashboard = () => {
 
             </Card>
           )}
+      
           {currentView === 'Assignment' && <Assignment />}
           {currentView === 'Performance' && <Performance />}
           {currentView === 'Material' && <Material />}
